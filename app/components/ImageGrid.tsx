@@ -33,7 +33,6 @@ function ImageGridImpl({ data, config, isLoading }: Props) {
                                     }
                                     fill
                                     className="object-cover rounded-lg"
-                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 16vw"
                                 />
                                 <div className="absolute bottom-0 left-0 right-0 p-2 bg-black/50 text-white rounded-b-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                                     <p className="text-sm line-clamp-1">
