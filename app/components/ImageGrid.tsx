@@ -19,7 +19,7 @@ function ImageGridImpl({ data, config, isLoading }: Props) {
                     return (
                         <div
                             key={id}
-                            className="relative w-full min-h-[200px] aspect-[4/3] group"
+                            className="relative w-full min-h-[200px] aspect-[4/3] group cursor-pointer"
                         >
                             <Link
                                 className="w-full h-full relative block"
