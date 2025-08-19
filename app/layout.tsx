@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
+import { ArticProvider } from './ArticProvider'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -30,7 +31,7 @@ export default function RootLayout({
                 <header className="p-2 pt-8 text-2xl md:text-3xl lg:text-4xl text-center">
                     <h1>ARTIC Viewer</h1>
                 </header>
-                {children}
+                <ArticProvider>{children}</ArticProvider>
                 <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
                     <a
                         className="flex items-center gap-2 hover:underline hover:underline-offset-4"

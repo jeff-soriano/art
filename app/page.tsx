@@ -1,86 +1,19 @@
 'use client'
 
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import {
-    getSearchResults,
-    ArticArtDataType,
-    ArticConfigType,
-    ArticPaginationType,
-} from '@/lib/articApi'
 import { FaSearch, FaSpinner } from 'react-icons/fa'
+import { useArticContext } from './ArticProvider'
 
 export default function Home() {
-    const [artData, setArtData] = useState<ArticArtDataType[]>([])
     const [searchQuery, setSearchQuery] = useState('')
-    const [config, setConfig] = useState<ArticConfigType | null>(null)
-    const [pagination, setPagination] = useState<ArticPaginationType | null>(
-        null
-    )
     const sentinelRef = useRef<HTMLDivElement>(null)
-    const [isLoading, setIsLoading] = useState(false)
-
-    const getResults = useCallback(
-        async (query: string, getNextPage: boolean = false) => {
-            // If we're already loading, don't get the results again
-            if (isLoading) return
-
-            // Set loading to true
-            setIsLoading(true)
-
-            // If we're not getting the next page, get the first page
-            if (!getNextPage) {
-                const results = await getSearchResults(query, 1)
-
-                setArtData(results.data)
-                setConfig(results.config)
-                setPagination(results.pagination)
-
-                setIsLoading(false)
-                return
-            }
-
-            // If we're getting the next page, and we have a pagination object,
-            // increment the page number by 1
-            // Otherwise, set the page number to 1
-            const pageNumber =
-                getNextPage && !!pagination ? pagination.current_page + 1 : 1
-
-            // If we have a pagination object, check that we are less than
-            // the total pages
-            if (pagination && pageNumber > pagination.total_pages) {
-                setIsLoading(false)
-                return
-            }
-
-            // Get the results
-            const results = await getSearchResults(query, pageNumber)
-
-            // Add the new results to the existing data
-            setArtData((prev) => {
-                // De-dupe the results
-                const existingIds = new Set(prev.map((p) => p.id))
-                const newData = results.data.filter(
-                    (result) => !existingIds.has(result.id)
-                )
-
-                return [...prev, ...newData]
-            })
-
-            // Set the config and pagination
-            setConfig(results.config)
-            setPagination(results.pagination)
-
-            // Set loading to false
-            setIsLoading(false)
-        },
-        [isLoading, pagination]
-    )
+    const { data, config, pagination, isLoading, runSearch } = useArticContext()
 
     useEffect(() => {
-        getResults(searchQuery)
+        runSearch(searchQuery, false)
     }, [])
 
     // Infinite scroll
@@ -98,7 +31,7 @@ export default function Home() {
                 // If the sentinel is intersecting, we have more results, and we're not loading,
                 // get the next page of results
                 if (entry.isIntersecting && hasMore && !isLoading) {
-                    getResults(searchQuery, true)
+                    runSearch(searchQuery, true)
                 }
             },
             { root: null, threshold: 0, rootMargin: '600px' }
@@ -107,7 +40,7 @@ export default function Home() {
         observer.observe(sentinel)
 
         return () => observer.disconnect()
-    }, [getResults, searchQuery, isLoading, pagination])
+    }, [runSearch, searchQuery, isLoading, pagination])
 
     return (
         <main className="flex flex-col font-sans min-h-screen p-8 pt-2 gap-4">
@@ -130,7 +63,7 @@ export default function Home() {
                 <div className="h-full">
                     <button
                         className="p-2 pl-4 bg-gray-200 rounded-r-xl border border-gray-200 h-full cursor-pointer hover:bg-gray-300"
-                        onClick={() => getResults(searchQuery)}
+                        onClick={() => runSearch(searchQuery, true)}
                     >
                         <FaSearch className="w-6 md:w-10 h-full" />
                     </button>
@@ -138,7 +71,7 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 p-4 lg:w-4/5 mx-auto">
-                {artData.map((data) => {
+                {data.map((data) => {
                     return (
                         <div
                             key={data.id}
