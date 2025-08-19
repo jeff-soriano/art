@@ -59,6 +59,11 @@ export type ArticSearchResultsType = {
     pagination: ArticPaginationType
 }
 
+export type ArticArtDetailsResponseType = {
+    config: ArticConfigType
+    data: ArticArtDetailsType
+}
+
 export type ArticPaginationType = {
     current_page: number
     limit: number
@@ -75,5 +80,15 @@ export const getSearchResults = async (
         `${BASE_URL}/search?q=${query}&fields=${fieldsToInclude.join(',')}&limit=50&page=${pageNumber}`
     )
     if (!res.ok) throw new Error('Search failed')
+    return res.json()
+}
+
+export const getArtDetails = async (
+    id: string
+): Promise<ArticArtDetailsResponseType> => {
+    const res = await fetch(
+        `${BASE_URL}/${id}?fields=${fieldsToInclude.join(',')}`
+    )
+    if (!res.ok) throw new Error('Art details failed')
     return res.json()
 }
