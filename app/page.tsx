@@ -8,9 +8,11 @@ import { ImageGrid } from './components/ImageGrid'
 export default function Home() {
     const [searchQuery, setSearchQuery] = useState('')
     const sentinelRef = useRef<HTMLDivElement>(null)
+    const currentSearchQueryRef = useRef('')
     const { data, config, pagination, isLoading, runSearch } = useArticContext()
 
     useEffect(() => {
+        currentSearchQueryRef.current = searchQuery
         runSearch(searchQuery, false)
     }, [])
 
@@ -29,7 +31,7 @@ export default function Home() {
                 // If the sentinel is intersecting, we have more results, and we're not loading,
                 // get the next page of results
                 if (entry.isIntersecting && hasMore && !isLoading) {
-                    runSearch(searchQuery, true)
+                    runSearch(currentSearchQueryRef.current, true)
                 }
             },
             { root: null, threshold: 0, rootMargin: '600px' }
@@ -38,7 +40,7 @@ export default function Home() {
         observer.observe(sentinel)
 
         return () => observer.disconnect()
-    }, [runSearch, searchQuery, isLoading, pagination])
+    }, [runSearch, isLoading, pagination])
 
     return (
         <main className="flex flex-col font-sans min-h-screen p-8 pt-2 gap-4">
@@ -61,17 +63,15 @@ export default function Home() {
                 <div className="h-full">
                     <button
                         className="p-2 pl-4 bg-gray-200 rounded-r-xl border border-gray-200 h-full cursor-pointer hover:bg-gray-300"
-                        onClick={() => runSearch(searchQuery, true)}
+                        onClick={() => runSearch(searchQuery, false)}
                     >
                         <FaSearch className="w-6 md:w-10 h-full" />
                     </button>
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 p-4 lg:w-4/5 mx-auto">
-                <ImageGrid data={data} config={config} isLoading={isLoading} />
-                <div id="sentinel" ref={sentinelRef} />
-            </div>
+            <ImageGrid data={data} config={config} isLoading={isLoading} />
+            <div id="sentinel" ref={sentinelRef} />
         </main>
     )
 }
