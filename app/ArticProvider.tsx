@@ -1,7 +1,7 @@
 'use client'
 
 import {
-    ArticArtDataType,
+    ArticArtDetailsType,
     ArticConfigType,
     ArticPaginationType,
     getSearchResults,
@@ -9,7 +9,7 @@ import {
 import { createContext, useState, useCallback, useContext } from 'react'
 
 export type ArticContextType = {
-    data: ArticArtDataType[]
+    data: ArticArtDetailsType[]
     config: ArticConfigType | null
     pagination: ArticPaginationType | null
     isLoading: boolean
@@ -19,7 +19,7 @@ export type ArticContextType = {
 const ArticContext = createContext<ArticContextType | undefined>(undefined)
 
 export function ArticProvider({ children }: { children: React.ReactNode }) {
-    const [data, setData] = useState<ArticArtDataType[]>([])
+    const [data, setData] = useState<ArticArtDetailsType[]>([])
     const [config, setConfig] = useState<ArticConfigType | null>(null)
     const [pagination, setPagination] = useState<ArticPaginationType | null>(
         null

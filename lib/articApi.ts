@@ -25,7 +25,7 @@ const fieldsToInclude = [
 
 // This type does not represent every key/value available for objects returned from the api
 // It only has what we'll actually use
-export type ArticArtDataType = {
+export type ArticArtDetailsType = {
     id: number
     title: string
     thumbnail: {
@@ -55,7 +55,7 @@ export type ArticConfigType = {
 
 export type ArticSearchResultsType = {
     config: ArticConfigType
-    data: ArticArtDataType[]
+    data: ArticArtDetailsType[]
     pagination: ArticPaginationType
 }
 
