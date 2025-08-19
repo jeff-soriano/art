@@ -7,22 +7,28 @@ import {
     getArtDetails,
 } from '@/lib/articApi'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import Link from 'next/link'
 
-export default function ArtPage({ params }: { params: { id: string } }) {
+export default function ArtPage({
+    params,
+}: {
+    params: Promise<{ id: string }>
+}) {
+    const { id } = use(params)
+
     const [artData, setArtData] = useState<ArticArtDetailsType | null>(null)
     const [artConfig, setArtConfig] = useState<ArticConfigType | null>(null)
     const { data, config } = useArticContext()
 
     useEffect(() => {
         const fetchArtData = async () => {
-            const artData = data.find(
-                (art) => art.id === parseInt(params.id)
-            ) as ArticArtDetailsType | undefined
+            const artData = data.find((art) => art.id === parseInt(id)) as
+                | ArticArtDetailsType
+                | undefined
 
             if (!artData) {
-                const artDetails = await getArtDetails(params.id)
+                const artDetails = await getArtDetails(id)
                 setArtData(artDetails.data)
                 setArtConfig(artDetails.config)
             } else {
@@ -32,7 +38,7 @@ export default function ArtPage({ params }: { params: { id: string } }) {
         }
 
         fetchArtData()
-    }, [data, config, params.id])
+    }, [data, config, id])
 
     if (!artData || !artConfig) return <div>Art not found</div>
 
