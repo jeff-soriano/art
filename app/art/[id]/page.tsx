@@ -21,6 +21,7 @@ export default function ArtPage({
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
     const { data, config } = useArticContext()
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         // Scroll to the top of the page so that we're not in the middle
@@ -115,7 +116,8 @@ export default function ArtPage({
                         `${artData.title} by ${artData.artist_title}`
                     }
                     fill
-                    className="object-cover rounded-lg"
+                    className="object-cover rounded-lg cursor-pointer"
+                    onClick={() => setOpen(true)}
                 />
             </div>
             <div className="text-left p-4 grid grid-cols-1 md:grid-cols-2 gap-4 motion-safe:animate-[fadeIn_0.5s_ease-in-out]">
@@ -145,6 +147,25 @@ export default function ArtPage({
                     dangerouslySetInnerHTML={{ __html: artData.description }}
                 />
             </div>
+
+            {open && (
+                <div
+                    onClick={() => setOpen(false)}
+                    className="w-full h-full fixed top-0 left-0 bg-black/90 flex items-center justify-center z-50"
+                >
+                    <div className="relative w-full h-full flex items-center justify-center">
+                        <Image
+                            src={`${artConfig.iiif_url}/${artData.image_id}/full/843,/0/default.jpg`}
+                            alt={
+                                artData.thumbnail?.alt_text ||
+                                `${artData.title} by ${artData.artist_title}`
+                            }
+                            fill
+                            className="object-contain"
+                        />
+                    </div>
+                </div>
+            )}
         </>
     )
 }
