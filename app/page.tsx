@@ -98,7 +98,12 @@ export default function Home() {
                 </div>
             </div>
 
-            <ImageGrid data={data} config={config} isLoading={isLoading} />
+            <ImageGrid
+                data={data}
+                config={config}
+                isLoading={isLoading}
+                pagination={pagination}
+            />
             <div id="sentinel" ref={sentinelRef} />
             <div aria-live="polite" className="sr-only">
                 {isLoading ? 'Loading...' : ariaLiveText}

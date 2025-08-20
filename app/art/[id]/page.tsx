@@ -99,7 +99,7 @@ export default function ArtPage({
     // Art not found
     if (error || !artData || !artConfig)
         return (
-            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-center mt-10">
+            <h2 className="font-serif text-center text-xl md:text-2xl lg:text-3xl mt-2">
                 Art not found
             </h2>
         )

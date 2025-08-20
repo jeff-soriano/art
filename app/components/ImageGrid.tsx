@@ -1,15 +1,28 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArticArtDetailsType, ArticConfigType } from '@/lib/articApi'
+import {
+    ArticArtDetailsType,
+    ArticConfigType,
+    ArticPaginationType,
+} from '@/lib/articApi'
 
 type Props = {
     data: ArticArtDetailsType[]
     config: ArticConfigType | null
     isLoading: boolean
+    pagination: ArticPaginationType | null
 }
 
-function ImageGridImpl({ data, config, isLoading }: Props) {
+function ImageGridImpl({ data, config, isLoading, pagination }: Props) {
+    if (pagination?.total === 0) {
+        return (
+            <div className="font-serif text-center text-xl md:text-2xl lg:text-3xl mt-2">
+                No results found
+            </div>
+        )
+    }
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-4 p-4 lg:w-4/5 mx-auto">
             {config &&
