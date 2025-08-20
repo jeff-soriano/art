@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { ArticProvider } from './ArticProvider'
+import { Footer } from './components/Footer'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -29,24 +30,7 @@ export default function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased mx-auto`}
             >
                 <ArticProvider>{children}</ArticProvider>
-                <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-                    <a
-                        className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-                        href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Github
-                    </a>
-                    <a
-                        className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-                        href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Jeff Soriano
-                    </a>
-                </footer>
+                <Footer />
             </body>
         </html>
     )
