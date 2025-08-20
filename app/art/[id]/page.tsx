@@ -57,24 +57,24 @@ export default function ArtPage({
                 {/* Skeleton Layout */}
                 <div className="flex flex-col gap-8">
                     {/* Image Skeleton */}
-                    <div className="w-full min-h-[300px] relative aspect-[4/3] mx-auto animate-pulse">
+                    <div className="w-full min-h-[300px] relative aspect-[4/3] mx-auto motion-safe:animate-pulse">
                         <div className="rounded-lg bg-gray-200 h-full dark:bg-gray-700"></div>
                     </div>
 
                     {/* Content Skeleton */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-pulse">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 motion-safe:animate-pulse">
                         {/* First column Skeleton */}
                         <div className="space-y-2">
-                            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-2/3"></div>
-                            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/3"></div>
-                            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-1/3"></div>
+                            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded motion-safe:animate-pulse w-2/3"></div>
+                            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded motion-safe:animate-pulse w-1/3"></div>
+                            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded motion-safe:animate-pulse w-1/3"></div>
                         </div>
                         {/* Second column Skeleton */}
                         <div className="space-y-3">
-                            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
-                            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-5/6"></div>
-                            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-4/5"></div>
-                            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse w-3/4"></div>
+                            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded motion-safe:animate-pulse"></div>
+                            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded motion-safe:animate-pulse w-5/6"></div>
+                            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded motion-safe:animate-pulse w-4/5"></div>
+                            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded motion-safe:animate-pulse w-3/4"></div>
                         </div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@ export default function ArtPage({
                 &larr; Back to search
             </Link>
 
-            <div className="w-full min-h-[300px] relative aspect-[4/3] mx-auto animate-[fadeIn_1s_ease-in-out]">
+            <div className="w-full min-h-[300px] relative aspect-[4/3] mx-auto motion-safe:animate-[fadeIn_0.5s_ease-in-out]">
                 <Image
                     src={`${artConfig.iiif_url}/${artData.image_id}/full/843,/0/default.jpg`}
                     alt={
@@ -113,7 +113,7 @@ export default function ArtPage({
                     className="object-cover rounded-lg"
                 />
             </div>
-            <div className="text-left p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="text-left p-4 grid grid-cols-1 md:grid-cols-2 gap-4 motion-safe:animate-[fadeIn_0.5s_ease-in-out]">
                 <div className="flex flex-col gap-1">
                     <h2>
                         <strong>{artData.artist_display}</strong>
