@@ -44,7 +44,10 @@ export default function Home() {
 
     return (
         <main className="flex flex-col font-sans min-h-screen p-8 pt-2 gap-4">
-            <div className="flex items-center justify-center w-full h-9 md:w-3/4 lg:w-1/2 md:h-12 mx-auto">
+            <div
+                role="search"
+                className="flex items-center justify-center w-full h-9 md:w-3/4 lg:w-1/2 md:h-12 mx-auto"
+            >
                 <label htmlFor="search" className="relative w-full h-full">
                     <input
                         className="border w-full p-2 md:p-4 md:text-lg rounded-xl rounded-r-none border-r-0 h-full border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -58,10 +61,16 @@ export default function Home() {
                         spellCheck="false"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                runSearch(query, false)
+                            }
+                        }}
                     />
                 </label>
                 <div className="h-full">
                     <button
+                        aria-label="Search"
                         className="p-2 pl-4 bg-gray-200 rounded-r-xl border border-gray-200 h-full cursor-pointer hover:bg-gray-300"
                         onClick={() => runSearch(query, false)}
                     >
