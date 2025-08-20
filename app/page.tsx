@@ -1,19 +1,19 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { useArticContext } from './ArticProvider'
 import { ImageGrid } from './components/ImageGrid'
 
 export default function Home() {
-    const [searchQuery, setSearchQuery] = useState('')
     const sentinelRef = useRef<HTMLDivElement>(null)
     const currentSearchQueryRef = useRef('')
-    const { data, config, pagination, isLoading, runSearch } = useArticContext()
+    const { data, config, pagination, isLoading, runSearch, query, setQuery } =
+        useArticContext()
 
     useEffect(() => {
-        currentSearchQueryRef.current = searchQuery
-        runSearch(searchQuery, false)
+        currentSearchQueryRef.current = query
+        runSearch(query, false)
     }, [])
 
     // Infinite scroll
@@ -56,14 +56,14 @@ export default function Home() {
                         placeholder="Search for art (i.e. 'monet')"
                         autoComplete="off"
                         spellCheck="false"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
                     />
                 </label>
                 <div className="h-full">
                     <button
                         className="p-2 pl-4 bg-gray-200 rounded-r-xl border border-gray-200 h-full cursor-pointer hover:bg-gray-300"
-                        onClick={() => runSearch(searchQuery, false)}
+                        onClick={() => runSearch(query, false)}
                     >
                         <FaSearch className="w-6 md:w-10 h-full" />
                     </button>

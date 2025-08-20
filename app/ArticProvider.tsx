@@ -9,16 +9,19 @@ import {
 import { createContext, useState, useCallback, useContext } from 'react'
 
 export type ArticContextType = {
+    query: string
     data: ArticArtDetailsType[]
     config: ArticConfigType | null
     pagination: ArticPaginationType | null
     isLoading: boolean
     runSearch: (query: string, getNextPage: boolean) => Promise<void>
+    setQuery: (query: string) => void
 }
 
 const ArticContext = createContext<ArticContextType | undefined>(undefined)
 
 export function ArticProvider({ children }: { children: React.ReactNode }) {
+    const [query, setQuery] = useState('')
     const [data, setData] = useState<ArticArtDetailsType[]>([])
     const [config, setConfig] = useState<ArticConfigType | null>(null)
     const [pagination, setPagination] = useState<ArticPaginationType | null>(
@@ -91,6 +94,8 @@ export function ArticProvider({ children }: { children: React.ReactNode }) {
                 pagination,
                 isLoading,
                 runSearch,
+                query,
+                setQuery,
             }}
         >
             {children}
