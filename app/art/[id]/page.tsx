@@ -19,6 +19,7 @@ export default function ArtPage({
     const [artData, setArtData] = useState<ArticArtDetailsType | null>(null)
     const [artConfig, setArtConfig] = useState<ArticConfigType | null>(null)
     const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
     const { data, config } = useArticContext()
 
     useEffect(() => {
@@ -29,23 +30,36 @@ export default function ArtPage({
 
     useEffect(() => {
         const fetchArtData = async () => {
-            setIsLoading(true)
+            try {
+                setIsLoading(true)
+                setError(null)
 
-            // Try to find the art details in the current data
-            const artData = data.find((art) => art.id === parseInt(id)) as
-                | ArticArtDetailsType
-                | undefined
+                // Try to find the art details in the current data
+                const artData = data.find((art) => art.id === parseInt(id)) as
+                    | ArticArtDetailsType
+                    | undefined
 
-            // If we don't find the art details, fetch them from the API
-            if (!artData) {
-                const artDetails = await getArtDetails(id)
-                setArtData(artDetails.data)
-                setArtConfig(artDetails.config)
-            } else {
-                setArtData(artData)
-                setArtConfig(config)
+                // If we don't find the art details, fetch them from the API
+                if (!artData) {
+                    const artDetails = await getArtDetails(id)
+
+                    if (!artDetails || !artDetails.data) {
+                        throw new Error('Art not found')
+                    }
+
+                    setArtData(artDetails.data)
+                    setArtConfig(artDetails.config)
+                } else {
+                    setArtData(artData)
+                    setArtConfig(config)
+                }
+                setIsLoading(false)
+            } catch (error) {
+                console.error(error)
+                setError('Art not found')
+            } finally {
+                setIsLoading(false)
             }
-            setIsLoading(false)
         }
 
         fetchArtData()
@@ -83,8 +97,12 @@ export default function ArtPage({
         )
 
     // Art not found
-    if (!artData || !artConfig)
-        return <h2 className="text-2xl font-bold">Art not found</h2>
+    if (error || !artData || !artConfig)
+        return (
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-center mt-10">
+                Art not found
+            </h2>
+        )
 
     // Art found
     return (
