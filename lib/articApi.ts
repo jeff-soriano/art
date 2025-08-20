@@ -9,18 +9,13 @@ const fieldsToInclude = [
     'id',
     'title',
     'thumbnail',
-    'date_start',
-    'date_end',
     'date_display',
     'artist_display',
-    'place_of_origin',
     'description',
-    'short_description',
     'medium_display',
-    'is_zoomable',
-    'artwork_type_title',
     'artist_title',
     'image_id',
+    'department_title',
 ]
 
 // This type does not represent every key/value available for objects returned from the api
@@ -34,18 +29,13 @@ export type ArticArtDetailsType = {
         lqip: string
         width: number
     }
-    date_start: number
-    date_end: number
     date_display: string
     artist_display: string
-    place_of_origin: string
     description: string
-    short_description: string
     medium_display: string
-    is_zoomable: boolean
-    artwork_type_title: string
     artist_title: string
     image_id: string
+    department_title: string
 }
 
 export type ArticConfigType = {

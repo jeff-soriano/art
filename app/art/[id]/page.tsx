@@ -119,7 +119,7 @@ export default function ArtPage({
                 />
             </div>
             <div className="text-left p-4 grid grid-cols-1 md:grid-cols-2 gap-4 motion-safe:animate-[fadeIn_0.5s_ease-in-out]">
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-2">
                     <h2>
                         <strong>{artData.artist_display}</strong>
                     </h2>
@@ -132,6 +132,12 @@ export default function ArtPage({
                     <p className="text-sm text-gray-500">
                         {artData.medium_display}
                     </p>
+                    <div>
+                        <p className="text-sm font-semibold">Department</p>
+                        <p className="text-sm text-gray-500">
+                            {artData.department_title}
+                        </p>
+                    </div>
                 </div>
 
                 <p
