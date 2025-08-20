@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { useArticContext } from './ArticProvider'
 import { ImageGrid } from './components/ImageGrid'
+import { Header } from './components/Header'
 
 export default function Home() {
     const sentinelRef = useRef<HTMLDivElement>(null)
@@ -57,40 +58,43 @@ export default function Home() {
     }
 
     return (
-        <main className="flex flex-col font-sans min-h-screen p-8 pt-2 gap-4">
-            <div
-                role="search"
-                className="flex items-center justify-center w-full h-9 md:w-3/4 lg:w-1/2 md:h-12 mx-auto"
-            >
-                <label htmlFor="search" className="relative w-full h-full">
-                    <span className="sr-only">Search</span>
-                    <input
-                        className="border w-full p-2 md:p-4 md:text-lg rounded-xl rounded-r-none border-r-0 h-full border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        id="search"
-                        name="search"
-                        type="search"
-                        aria-label="Search"
-                        aria-autocomplete="none"
-                        placeholder="Search for art (i.e. 'monet')"
-                        autoComplete="off"
-                        spellCheck="false"
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
-                                handleSearch()
-                            }
-                        }}
-                    />
-                </label>
-                <div className="h-full">
-                    <button
-                        aria-label="Search button"
-                        className="p-2 pl-4 bg-gray-200 rounded-r-xl border border-gray-200 h-full cursor-pointer hover:bg-gray-300"
-                        onClick={handleSearch}
-                    >
-                        <FaSearch className="w-6 md:w-10 h-full text-black" />
-                    </button>
+        <main className="flex flex-col font-sans min-h-screen px-8 pt-2">
+            <div className="sticky top-0 z-10 bg-background pb-4">
+                <Header />
+                <div
+                    role="search"
+                    className="flex items-center justify-center w-full h-9 md:w-3/4 lg:w-1/2 md:h-12 mx-auto"
+                >
+                    <label htmlFor="search" className="relative w-full h-full">
+                        <span className="sr-only">Search</span>
+                        <input
+                            className="border w-full p-2 md:p-4 md:text-lg rounded-xl rounded-r-none border-r-0 h-full border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            id="search"
+                            name="search"
+                            type="search"
+                            aria-label="Search"
+                            aria-autocomplete="none"
+                            placeholder="Search for art (i.e. 'monet')"
+                            autoComplete="off"
+                            spellCheck="false"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    handleSearch()
+                                }
+                            }}
+                        />
+                    </label>
+                    <div className="h-full">
+                        <button
+                            aria-label="Search button"
+                            className="p-2 pl-4 bg-gray-200 rounded-r-xl border border-gray-200 h-full cursor-pointer hover:bg-gray-300"
+                            onClick={handleSearch}
+                        >
+                            <FaSearch className="w-6 md:w-10 h-full text-black" />
+                        </button>
+                    </div>
                 </div>
             </div>
 

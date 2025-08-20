@@ -52,14 +52,7 @@ export default function ArtPage({
     // Skeleton loading state
     if (isLoading)
         return (
-            <div className="w-full flex flex-col gap-2 p-4 md:w-3/4 mx-auto lg:max-w-4xl">
-                <Link
-                    href="/"
-                    className="text-sm text-gray-500 hover:underline"
-                >
-                    &larr; Back to search
-                </Link>
-
+            <>
                 {/* Skeleton Layout */}
                 <div className="flex flex-col gap-8">
                     {/* Image Skeleton */}
@@ -84,30 +77,16 @@ export default function ArtPage({
                         </div>
                     </div>
                 </div>
-            </div>
+            </>
         )
 
     // Art not found
     if (!artData || !artConfig)
-        return (
-            <div className=" text-center w-full flex flex-col gap-2 p-4 md:w-3/4 mx-auto lg:max-w-4xl">
-                <h2 className="text-2xl font-bold">Art not found</h2>
-                <Link
-                    href="/"
-                    className="text-sm text-gray-500 hover:underline"
-                >
-                    &larr; Back to search
-                </Link>
-            </div>
-        )
+        return <h2 className="text-2xl font-bold">Art not found</h2>
 
     // Art found
     return (
-        <div className="w-full flex flex-col gap-2 p-4 md:w-3/4 mx-auto lg:max-w-4xl">
-            <Link href="/" className="text-sm text-gray-500 hover:underline">
-                &larr; Back to search
-            </Link>
-
+        <>
             <div className="w-full min-h-[300px] relative aspect-[4/3] mx-auto motion-safe:animate-[fadeIn_0.5s_ease-in-out]">
                 <Image
                     src={`${artConfig.iiif_url}/${artData.image_id}/full/843,/0/default.jpg`}
@@ -140,6 +119,6 @@ export default function ArtPage({
                     dangerouslySetInnerHTML={{ __html: artData.description }}
                 />
             </div>
-        </div>
+        </>
     )
 }

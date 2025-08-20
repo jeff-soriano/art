@@ -28,9 +28,6 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased mx-auto`}
             >
-                <header className="p-2 pt-8 text-4xl md:text-5xl lg:text-6xl font-bold font-serif text-center">
-                    <h1>ART</h1>
-                </header>
                 <ArticProvider>{children}</ArticProvider>
                 <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
                     <a
