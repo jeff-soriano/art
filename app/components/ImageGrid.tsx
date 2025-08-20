@@ -55,6 +55,7 @@ function ImageGridImpl({ data, config, isLoading }: Props) {
                             <div className="flex items-center justify-center w-full h-full bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
                         </div>
                     ))}
+                    <span className="sr-only">Loading...</span>
                 </>
             )}
         </div>
