@@ -8,7 +8,6 @@ import {
 } from '@/lib/articApi'
 import Image from 'next/image'
 import { use, useEffect, useState } from 'react'
-import Link from 'next/link'
 
 export default function ArtPage({
     params,
@@ -31,10 +30,13 @@ export default function ArtPage({
     useEffect(() => {
         const fetchArtData = async () => {
             setIsLoading(true)
+
+            // Try to find the art details in the current data
             const artData = data.find((art) => art.id === parseInt(id)) as
                 | ArticArtDetailsType
                 | undefined
 
+            // If we don't find the art details, fetch them from the API
             if (!artData) {
                 const artDetails = await getArtDetails(id)
                 setArtData(artDetails.data)
