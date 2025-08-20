@@ -23,6 +23,12 @@ export default function ArtPage({
     const { data, config } = useArticContext()
 
     useEffect(() => {
+        // Scroll to the top of the page so that we're not in the middle
+        // of the page when we navigate to a new art piece
+        window.scrollTo(0, 0)
+    }, [])
+
+    useEffect(() => {
         const fetchArtData = async () => {
             setIsLoading(true)
             const artData = data.find((art) => art.id === parseInt(id)) as
