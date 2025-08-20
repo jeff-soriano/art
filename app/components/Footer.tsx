@@ -11,6 +11,7 @@ export const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
             >
+                <span className="sr-only">Github repo</span>
                 <FaGithub />
             </Link>
             <p>&copy; 2025 Jeff Soriano</p>
