@@ -40,7 +40,18 @@ export default function ArtPage({
         fetchArtData()
     }, [data, config, id])
 
-    if (!artData || !artConfig) return <div>Art not found</div>
+    if (!artData || !artConfig)
+        return (
+            <div className=" text-center w-full flex flex-col gap-2 p-4 md:w-3/4 mx-auto lg:max-w-4xl">
+                <h2 className="text-2xl font-bold">Art not found</h2>
+                <Link
+                    href="/"
+                    className="text-sm text-gray-500 hover:underline"
+                >
+                    &larr; Back to search
+                </Link>
+            </div>
+        )
 
     return (
         <div className="w-full flex flex-col gap-2 p-4 md:w-3/4 mx-auto lg:max-w-4xl">
