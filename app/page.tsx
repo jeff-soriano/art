@@ -74,7 +74,7 @@ export default function Home() {
                         className="p-2 pl-4 bg-gray-200 rounded-r-xl border border-gray-200 h-full cursor-pointer hover:bg-gray-300"
                         onClick={() => runSearch(query, false)}
                     >
-                        <FaSearch className="w-6 md:w-10 h-full" />
+                        <FaSearch className="w-6 md:w-10 h-full text-black" />
                     </button>
                 </div>
             </div>
