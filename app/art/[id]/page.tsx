@@ -48,7 +48,7 @@ export default function ArtPage({
                 &larr; Back to search
             </Link>
 
-            <div className="w-full  min-h-[300px] relative aspect-[4/3] mx-auto">
+            <div className="w-full min-h-[300px] relative aspect-[4/3] mx-auto">
                 <Image
                     src={`${artConfig.iiif_url}/${artData.image_id}/full/843,/0/default.jpg`}
                     alt={
@@ -59,7 +59,7 @@ export default function ArtPage({
                     className="object-cover rounded-lg"
                 />
             </div>
-            <div className="text-left p-4 grid grid-cols-1 md:grid-cols-2 mx-auto text-center gap-4">
+            <div className="text-left p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1">
                     <h2>
                         <strong>{artData.artist_display}</strong>
