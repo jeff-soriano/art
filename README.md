@@ -16,7 +16,7 @@ To run tests, run `npm run test`
 
 ## Notes and thoughts
 
-Given the short time frame of this project, and my own limited time as a father of two young kiddos, I decided to use technologies I was familiar with. Namely, Next JS as the React framework, Tailwind CSS for styling, and Jest for testing. For global state management, since this was a simpler project I stored everything within a Provider instead of using something like Redux. For tests, I decided to add simple tests for the core components, such as when the api returns a success vs failure
+Given the short time frame of this project, and my own limited time as a father of two young kiddos, I decided to use technologies I was familiar with. Namely, Next JS as the React framework, Tailwind CSS for styling, and Jest for testing.I like Next for its Image component optimization and prefetching in its Link component, both of which are important for this type of app I think. For global state management, since this was a simpler project I stored everything within a Provider instead of using something like Redux. For tests, I decided to add simple tests for the core components, such as when the api returns a success vs failure
 
 ## Cool stuff
 
