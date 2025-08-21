@@ -128,7 +128,7 @@ export default function ArtPage({
                     </h2>
                     <h3>
                         <strong>
-                            <em>{artData.title}</em>{' '}
+                            <em>{artData.title}</em>
                         </strong>
                         , {artData.date_display}
                     </h3>
