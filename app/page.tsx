@@ -56,6 +56,7 @@ export default function Home() {
     // as opposed to when the user is scrolling through the results.
     // Here we update the aria live text for when the search is complete.
     const handleSearch = () => {
+        window.scrollTo(0, 0)
         setAriaLiveText('Searching...')
         runSearch(query, false)
         setTimeout(() => {
