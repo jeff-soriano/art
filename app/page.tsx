@@ -10,8 +10,16 @@ export default function Home() {
     const sentinelRef = useRef<HTMLDivElement>(null)
     const currentSearchQueryRef = useRef('')
     const [ariaLiveText, setAriaLiveText] = useState('')
-    const { data, config, pagination, isLoading, runSearch, query, setQuery } =
-        useArticContext()
+    const {
+        data,
+        config,
+        pagination,
+        isLoading,
+        runSearch,
+        query,
+        setQuery,
+        error,
+    } = useArticContext()
 
     useEffect(() => {
         currentSearchQueryRef.current = query
@@ -103,6 +111,7 @@ export default function Home() {
                 config={config}
                 isLoading={isLoading}
                 pagination={pagination}
+                error={error}
             />
             <div id="sentinel" ref={sentinelRef} />
             <div aria-live="polite" className="sr-only">
