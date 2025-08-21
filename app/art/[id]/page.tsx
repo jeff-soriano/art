@@ -118,6 +118,7 @@ export default function ArtPage({
                     fill
                     className="object-cover rounded-lg cursor-pointer"
                     onClick={() => setOpen(true)}
+                    data-testid="art-image"
                 />
             </div>
             <div className="text-left p-4 grid grid-cols-1 md:grid-cols-2 gap-4 motion-safe:animate-[fadeIn_0.5s_ease-in-out]">
