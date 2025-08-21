@@ -55,15 +55,13 @@ export default function Home() {
     // This search function is used when the user initiates a search,
     // as opposed to when the user is scrolling through the results.
     // Here we update the aria live text for when the search is complete.
-    const handleSearch = () => {
-        window.scrollTo(0, 0)
+    const handleSearch = async () => {
         setAriaLiveText('Searching...')
-        runSearch(query, false)
-        setTimeout(() => {
-            setAriaLiveText(
-                `Search results for ${query} complete, found ${pagination?.total} results`
-            )
-        }, 1000)
+        await runSearch(query, false)
+        window.scrollTo(0, 0)
+        setAriaLiveText(
+            `Search results for ${query} complete, found ${pagination?.total} results`
+        )
     }
 
     return (
